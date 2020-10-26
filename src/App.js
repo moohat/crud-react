@@ -1,17 +1,70 @@
 import React, { Component } from 'react'
 import JumbotronComponent from './components/JumbotronComponent'
 import NavbarComponent from './components/NavbarComponent'
-
+import TableComponent from './components/TableComponent';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from "react-router-dom";
+import EditUserContainer from './components/containers/EditUserContainer';
+import HomeContainer from './components/containers/HomeContainer';
+import CreateUserContainer from './components/containers/CreateUserContainer';
+import DetailUserContainer from './components/containers/DetailUserContainer';
 export class App extends Component {
   state = {
-    title: 'CRUD REACT'
+    title: 'CRUD REACT',
+    users: [
+      {
+        id: 1,
+        nama: 'taufik',
+        alamat: 'bogor',
+        umur: 31,
+        nohp: '083819005227'
+      },
+      {
+        id: 2,
+        nama: 'Tia',
+        alamat: 'bogor',
+        umur: 24,
+        nohp: '083819005227'
+      },
+      {
+        id: 3,
+        nama: 'Syamil',
+        alamat: 'bogor',
+        umur: 3,
+        nohp: '083819005227'
+      },
+      {
+        id: 4,
+        nama: 'Sakha',
+        alamat: 'bogor',
+        umur: 1,
+        nohp: '083819005227'
+      }
+    ]
   }
   render() {
     const { title } = this.state;
     return (
       <div>
         <NavbarComponent />
-        <JumbotronComponent title={title}/>
+        <JumbotronComponent title={title} />
+        <Router>
+          <Route path="/" exact>
+            <HomeContainer users ={this.state.users}/>
+          </Route>
+          <Route path="/create" exact>
+            <CreateUserContainer />
+          </Route>
+          <Route path="/edit/:id" exact>
+            <EditUserContainer />
+          </Route>
+          <Route path="/detail/:id" exact>
+            <DetailUserContainer />
+          </Route>
+        </Router>
       </div>
     )
   }
