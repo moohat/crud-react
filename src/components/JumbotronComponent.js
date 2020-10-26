@@ -1,5 +1,6 @@
 import React from 'react';
 import { Jumbotron, Container } from 'reactstrap';
+import {connect} from 'react-redux'
 
 
 const JumbotronComponent = (props) => {
@@ -15,4 +16,10 @@ const JumbotronComponent = (props) => {
   );
 };
 
-export default JumbotronComponent;
+const mapStateToProps = state => {
+  return {
+    title: state.users.title
+  }
+}
+
+export default connect(mapStateToProps, null) (JumbotronComponent);

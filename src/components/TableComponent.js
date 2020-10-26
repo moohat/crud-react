@@ -6,6 +6,7 @@ import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import { Button, Container, NavLink } from 'reactstrap';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
 const { SearchBar } = Search;
 
 const columns = [{
@@ -128,6 +129,7 @@ const TableComponent = (props) => {
             <ToolkitProvider
                 bootstrap4
                 keyField='id'
+                //! ambil data dari mapStateToProps
                 data={props.users}
                 columns={columns}
                 defaultSorted={defaultSorted}
@@ -160,7 +162,13 @@ const TableComponent = (props) => {
                 }
             </ToolkitProvider>
         </Container>
+
     )
 }
+const mapStateToProps = state => {
+    return {
+        users: state.users.data
+    }
+}
 
-export default TableComponent
+export default connect(mapStateToProps, null)(TableComponent)

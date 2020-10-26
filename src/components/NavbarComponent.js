@@ -10,6 +10,8 @@ import {
   NavbarText,
   Container
 } from 'reactstrap';
+import { connect } from 'react-redux'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAd } from '@fortawesome/free-solid-svg-icons'
 
@@ -22,7 +24,7 @@ const NavbarComponent = (props) => {
     <div>
       <Navbar color="light" light expand="md">
               <Container>
-              <NavbarBrand href="/"><FontAwesomeIcon  icon={faAd}/> CRUD REACT</NavbarBrand>
+              <NavbarBrand href="/"><FontAwesomeIcon  icon={faAd}/> {props.title}</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
@@ -41,4 +43,15 @@ const NavbarComponent = (props) => {
   );
 }
 
-export default NavbarComponent;
+const mapStateToProps = state => {
+  return {
+    title: state.users.title
+  }
+}
+// const mapStateToProps = state => {
+//   return {
+//     users: state.users.data
+//   }
+// }
+
+export default connect(mapStateToProps, null)(NavbarComponent);
