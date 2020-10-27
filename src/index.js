@@ -6,7 +6,7 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 //reducer untuk menyimpan state
-import reducer from './reducers';
+import reducer from './redux/reducers';
 //untuk async api 
 import thunk from 'redux-thunk';
 

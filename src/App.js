@@ -47,6 +47,7 @@ export class App extends Component {
   //     }
   // ]
   // }
+  
   render() {
     //! tanpa redux
     // const { title } = this.state;
