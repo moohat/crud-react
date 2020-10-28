@@ -1,50 +1,31 @@
 import React from 'react';
+import { GET_USERS_LIST } from '../action/userAction';
+
+
 
 let initialState = {
-    data: [
-        {
-            id: 1,
-            nama: 'taufik',
-            alamat: 'bogor',
-            umur: 31,
-            nohp: '083819005227'
-        },
-        {
-            id: 2,
-            nama: 'Tia',
-            alamat: 'bogor',
-            umur: 24,
-            nohp: '083819005227'
-        },
-        {
-            id: 3,
-            nama: 'Syamil',
-            alamat: 'bogor',
-            umur: 3,
-            nohp: '083819005227'
-        },
-        {
-            id: 4,
-            nama: 'Sakha',
-            alamat: 'bogor',
-            umur: 1,
-            nohp: '083819005227'
-        },
-        {
-            id: 5,
-            nama: 'Humaira',
-            alamat: 'bogor',
-            umur: 1,
-            nohp: '083819005227'
-        }
-    ],
-    error: false,
+    data: false,
+    errorUserList: false,
     title: 'CRUD REACT',
 
 }
 
 const users = (state = initialState, action) => {
-    return state
+    switch (action.type) {
+        case GET_USERS_LIST:
+            return {
+                ...state,
+                data: action.payload.data,
+                errorUsersList: action.payload.errorMessage
+            };
+        
+        
+
+
+        default:
+            return state;
+    }
+
 }
 
 export default users

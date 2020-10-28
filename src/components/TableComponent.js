@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
-import { Button, Container, NavLink } from 'reactstrap';
+import { Button, Container, NavLink, Spinner } from 'reactstrap';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
@@ -124,50 +124,68 @@ const TableComponent = (props) => {
 
     return (
         <Container>
+            {
+                props.users ?
 
 
-            <ToolkitProvider
-                bootstrap4
-                keyField='id'
-                //! ambil data dari mapStateToProps
-                data={props.users}
-                columns={columns}
-                defaultSorted={defaultSorted}
+                    <ToolkitProvider
+                        bootstrap4
+                        keyField='id'
+                        //! ambil data dari mapStateToProps
+                        data={props.users}
+                        columns={columns}
+                        defaultSorted={defaultSorted}
 
-                search
-            >
-                {
-                    props => (
-                        <div>
-                            <div className="float-left">
-                                <Link to="/create">
+                        search
+                    >
+                        {
+                            props => (
+                                <div>
+                                    <div className="float-left">
+                                        <Link to="/create">
 
-                                    <Button>
-                                        <FontAwesomeIcon icon={faUser} />
-                                        {' '}Tambah
+                                            <Button>
+                                                <FontAwesomeIcon icon={faUser} />
+                                                {' '}Tambah
                                         </Button>
-                                </Link>
-                            </div>
-                            <div className="float-right">
+                                        </Link>
+                                    </div>
+                                    <div className="float-right">
 
-                                <SearchBar {...props.searchProps} placeholder="Search..." />
-                            </div>
-                            <BootstrapTable
-                                {...props.baseProps}
-                                pagination={paginationFactory(options)
-                                }
-                            />
+                                        <SearchBar {...props.searchProps} placeholder="Search..." />
+                                    </div>
+                                    <BootstrapTable
+                                        {...props.baseProps}
+                                        pagination={paginationFactory(options)
+                                        }
+                                    />
+                                </div>
+                            )
+                        }
+                    </ToolkitProvider>
+
+                    : (
+
+                        <div className="text-center">
+                            {
+                                props.errorUsersList ?
+                                <h1>{props.errorUsersList}</h1>
+                                :
+                                <Spinner type="grow" color="success"></Spinner>
+                            }
                         </div>
-                    )
-                }
-            </ToolkitProvider>
+
+                    )}
         </Container>
+
 
     )
 }
 const mapStateToProps = state => {
     return {
-        users: state.users.data
+        users: state.users.data,
+        errorUsersList: state.users.errorUsersList
+
     }
 }
 
