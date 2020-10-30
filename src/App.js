@@ -58,24 +58,19 @@ export class App extends Component {
         {/* <JumbotronComponent title={title} /> */}
         <JumbotronComponent/>
         <Router>
-          <Route path="/" exact>
+          <Route path="/" exact component={HomeContainer} />
         {/* //! tanpa redux state users dilempar ke HomeConainer sebagai props.users,
             //! dari HomeContainer, props.users dilempar ke TableComponent sebagai props.users
             //! dengan menggunakan redux, tidak perlu mendefinisikan state user,
             //! users langsung di definisikan di TableComponent dengan mapStateToProps
         */}
             {/* <HomeContainer users ={this.state.users}/> */}
-            <HomeContainer />
-          </Route>
-          <Route path="/create" exact>
-            <CreateUserContainer />
-          </Route>
-          <Route path="/edit/:id" exact>
-            <EditUserContainer />
-          </Route>
-          <Route path="/detail/:id" exact>
-            <DetailUserContainer />
-          </Route>
+          <Route path="/create" exact component={CreateUserContainer} />
+            
+          <Route path="/edit/:id" exact component={EditUserContainer} />
+          <Route path="/detail/:id" exact component={DetailUserContainer} />
+
+            
         </Router>
       </div>
     )

@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import TableComponent from '../TableComponent';
 import { connect } from 'react-redux'
-import { getUsersList } from '../../redux/action/userAction';
+import { deleteUserDetail, getUsersList } from '../../redux/action/userAction';
 
 
 class HomeContainer extends Component {
 
     componentDidMount() {
         this.props.dispatch(getUsersList())
+        this.props.dispatch(deleteUserDetail());
     }
     render() {
         //! tanpa redux
